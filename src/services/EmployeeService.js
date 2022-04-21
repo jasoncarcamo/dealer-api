@@ -1,6 +1,11 @@
+const res = require("express/lib/response");
+
 const EmployeeService = {
     getAllEmpoyees(db){
     return db.select("*").from("employees");  
+    },
+    getEmployeeByWorkEmail(db, work_email){
+        return db.select("*").from("employees").where({work_email});
     },
     getEmployeeById(db, id){
         return db.select("*").from("employees").where({id}).first();
