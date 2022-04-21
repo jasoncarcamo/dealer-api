@@ -9,6 +9,9 @@ app.use(morgan("tiny"));
 app.use(cors());
 app.use(helmet());
 
+const RegisterRouter = require("../routes/RegisterRouter");
+
+app.use("/api", RegisterRouter);
 
 //Middleware error handler
 app.use(function errorHandler(error, req, res, next) {

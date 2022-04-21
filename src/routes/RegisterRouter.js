@@ -6,6 +6,7 @@ const Bcrypt = require("../services/Bcrypt");
 const JWT = require("../services/JWT");
 
 RegisterRouter
+    .route("/register")
     .post((req, res)=>{
         const {
             first_name,
