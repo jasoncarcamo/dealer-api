@@ -1,7 +1,5 @@
-const PassengersService = require("../services/PassengersService/PassengersService");
-const DriversService = require("../services/DriversService/DriversService");
-const JWT = require("../services/JWT/JWT");
-let UserService;
+const JWT = require("../services/JWT");
+const EmployeeService = require("../services/EmployeeService");
 
 function requireAuth( req, res, next){
     const authToken = req.get("authorization") || "";
@@ -23,7 +21,7 @@ function requireAuth( req, res, next){
             UserService = PassengersService;
         };
         
-        UserService.getBySub( req.app.get("db"), payload.sub)
+        EmployeeService.getEmployeeByWorkEmail( req.app.get("db"), payload.sub)
             .then( user => {
                 if(!user){
 

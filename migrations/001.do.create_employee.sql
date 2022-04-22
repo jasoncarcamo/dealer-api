@@ -3,7 +3,8 @@ CREATE TABLE employees (
     first_name TEXT NOT NULL,
     middle_name TEXT NOT NULL,
     last_name TEXT NOT NULL,
-    commision_num INTEGER NOT NULL,
+    commission_num INTEGER NOT NULL,
     work_email TEXT NOT NULL,
+    mobile_number INTEGER NOT NULL,
     password TEXT NOT NULL
 );

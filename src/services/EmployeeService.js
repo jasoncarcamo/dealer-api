@@ -5,7 +5,7 @@ const EmployeeService = {
     return db.select("*").from("employees");  
     },
     getEmployeeByWorkEmail(db, work_email){
-        return db.select("*").from("employees").where({work_email});
+        return db.select("*").from("employees").where({work_email}).first();
     },
     getEmployeeById(db, id){
         return db.select("*").from("employees").where({id}).first();

@@ -12,8 +12,9 @@ RegisterRouter
             first_name,
             middle_name,
             last_name,
-            comission_num,
+            commission_num,
             work_email,
+            mobile_number,
             password
         } = req.body;
 
@@ -21,13 +22,17 @@ RegisterRouter
             first_name,
             middle_name,
             last_name,
-            comission_num,
+            commission_num,
             work_email,
+            mobile_number,
             password
         };
 
-        for(const [key] of Object.keys(newEmployee)){
-            if(!key){
+        console.log(newEmployee);
+
+        for(const key of Object.keys(newEmployee)){
+            console.log(key)
+            if(!key || !newEmployee[key]){
                 return res.status(400).json({
                     error: `Missing ${key} in request`
                 });
@@ -36,8 +41,9 @@ RegisterRouter
 
         const database = req.app.get("db");
 
-        EmployeeService.getEmployeeByEmail(database, newEmployee.work_email)
+        EmployeeService.getEmployeeByWorkEmail(database, newEmployee.work_email)
             .then(dbEmployee => {
+                console.log(dbEmployee)
                 if(dbEmployee){
                     return res.status(400).json({
                         error: `${work_email} already exists`
@@ -50,7 +56,7 @@ RegisterRouter
 
                         EmployeeService.createEmployee(database, newEmployee)
                             .then( createdEmployee => {
-                                const subject = createdEmployee.email;
+                                const subject = createdEmployee.work_email;
                                 const payload = {
                                     user: createdEmployee.email,
                                     type: "employee"
