@@ -12,9 +12,9 @@ app.use(express.urlencoded({extended: true}));
 app.use(express.json());
 app.use(helmet());
 
-const RegisterRouter = require("../routes/RegisterRouter");
+const AuthenticationRouter = require("../routes/AuthenticationRouter");
 
-app.use("/api", RegisterRouter);
+app.use("/api", AuthenticationRouter);
 
 //Middleware error handler
 app.use(function errorHandler(error, req, res, next) {

@@ -14,12 +14,6 @@ function requireAuth( req, res, next){
 
     try{
         const payload = JWT.verifyToken(bearerToken);
-
-        if(payload.type === "Driver"){
-            UserService = DriversService;
-        } else if(payload.type === "Passenger"){
-            UserService = PassengersService;
-        };
         
         EmployeeService.getEmployeeByWorkEmail( req.app.get("db"), payload.sub)
             .then( user => {

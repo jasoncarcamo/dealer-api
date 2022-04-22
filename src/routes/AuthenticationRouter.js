@@ -1,11 +1,13 @@
 const express = require("express");
-const RegisterRouter = express.Router();
+const AuthenticationRouter = express.Router();
 const {requireAuth} = require("../middleware/jwtAuth");
 const EmployeeService = require("../services/EmployeeService");
 const Bcrypt = require("../services/Bcrypt");
 const JWT = require("../services/JWT");
+const res = require("express/lib/response");
+const { hashPassword } = require("../services/Bcrypt");
 
-RegisterRouter
+AuthenticationRouter
     .route("/register")
     .post((req, res)=>{
         const {
@@ -71,4 +73,59 @@ RegisterRouter
             })
     });
 
-module.exports = RegisterRouter;
+AuthenticationRouter
+    .route("/login")
+    .post((resw, req)=>{
+        const {
+            work_email,
+            password
+        } = req.body;
+
+        const employee = {
+            work_email,
+            password
+        };
+        const database = req.app.get("db");
+
+        for(const key of Object.keys(employee)){
+            if(!key || employee[key]){
+                return res.status(400).json({
+                    error: `Missing ${key} in request`
+                });
+            };
+        };
+
+        EmployeeService.getEmployeeByWorkEmail(database, employee.work_email)
+            .then( dbEmployee => {
+                if(!dbEmployee){
+                    return res.status(200).json({
+                        error: `${employee.work_email} was not found`
+                    });
+                };
+
+                Bcrypt.comparePassword(employee.password, dbEmployee.password)
+                    .then( passwordMatched => {
+
+                        if(!passwordMatched){
+                            return res.status(400).json({
+                                error: "Incorrect password"
+                            });
+                        }
+
+                        const subject = dbEmployee.work_email;
+                        const payload = {
+                            user: dbEmployee.work_email,
+                            type: "employee"
+                        };
+
+                        delete dbEmployee.password;
+
+                        return res.status(200).json({
+                            employee: dbEmployee,
+                            token: JWT.createJwt()
+                        })
+                    })
+            })
+    });
+
+module.exports = AuthenticationRouter;
