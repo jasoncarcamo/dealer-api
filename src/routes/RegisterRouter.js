@@ -28,10 +28,8 @@ RegisterRouter
             password
         };
 
-        console.log(newEmployee);
-
         for(const key of Object.keys(newEmployee)){
-            console.log(key)
+            
             if(!key || !newEmployee[key]){
                 return res.status(400).json({
                     error: `Missing ${key} in request`
@@ -43,7 +41,7 @@ RegisterRouter
 
         EmployeeService.getEmployeeByWorkEmail(database, newEmployee.work_email)
             .then(dbEmployee => {
-                console.log(dbEmployee)
+                
                 if(dbEmployee){
                     return res.status(400).json({
                         error: `${work_email} already exists`
