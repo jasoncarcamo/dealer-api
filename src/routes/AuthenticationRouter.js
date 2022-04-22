@@ -75,7 +75,7 @@ AuthenticationRouter
 
 AuthenticationRouter
     .route("/login")
-    .post((resw, req)=>{
+    .post((req, res)=>{
         const {
             work_email,
             password
@@ -88,7 +88,7 @@ AuthenticationRouter
         const database = req.app.get("db");
 
         for(const key of Object.keys(employee)){
-            if(!key || employee[key]){
+            if(!key || !employee[key]){
                 return res.status(400).json({
                     error: `Missing ${key} in request`
                 });
@@ -122,7 +122,7 @@ AuthenticationRouter
 
                         return res.status(200).json({
                             employee: dbEmployee,
-                            token: JWT.createJwt()
+                            token: JWT.createJwt(subject, payload)
                         })
                     })
             })
