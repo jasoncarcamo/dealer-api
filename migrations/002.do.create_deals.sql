@@ -16,5 +16,5 @@ CREATE TABLE deals (
     comments TEXT NOT NULL,
     write_up_date TIMESTAMP,
     deposit INTEGER NOT NULL,
-    employee INTEGER REFERENCES employees(id) NOT NULL
+    employee_id INTEGER REFERENCES employees(id) NOT NULL
 );

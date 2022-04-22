@@ -13,8 +13,10 @@ app.use(express.json());
 app.use(helmet());
 
 const AuthenticationRouter = require("../routes/AuthenticationRouter");
+const DealsRouter = require("../routes/DealsRouter");
 
 app.use("/api", AuthenticationRouter);
+app.use("/api", DealsRouter);
 
 //Middleware error handler
 app.use(function errorHandler(error, req, res, next) {
