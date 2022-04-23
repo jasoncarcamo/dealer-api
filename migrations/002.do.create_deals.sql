@@ -6,6 +6,7 @@ CREATE TABLE deals (
     model TEXT NOT NULL,
     trim TEXT NOT NULL,
     vin TEXT NOT NULL,
+    stock_num TEXT NOT NULL,
     arrival_start TIMESTAMP,
     arrival_end TIMESTAMP,
     trade_in BOOLEAN DEFAULT FALSE NOT NULL,
