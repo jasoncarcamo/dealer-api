@@ -14,9 +14,11 @@ app.use(helmet());
 
 const AuthenticationRouter = require("../routes/AuthenticationRouter");
 const DealsRouter = require("../routes/DealsRouter");
+const EmployeeRouter = require("../routes/EmployeeRouter");
 
 app.use("/api", AuthenticationRouter);
 app.use("/api", DealsRouter);
+app.use("/api", EmployeeRouter);
 
 //Middleware error handler
 app.use(function errorHandler(error, req, res, next) {

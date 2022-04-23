@@ -5,7 +5,6 @@ const EmployeeService = require("../services/EmployeeService");
 const Bcrypt = require("../services/Bcrypt");
 const JWT = require("../services/JWT");
 const res = require("express/lib/response");
-const { hashPassword } = require("../services/Bcrypt");
 
 AuthenticationRouter
     .route("/register")
@@ -67,10 +66,10 @@ AuthenticationRouter
                                 return res.status(200).json({
                                     createdEmployee,
                                     token: JWT.createJwt(subject, payload)
-                                })
-                            })
-                    })
-            })
+                                });
+                            });
+                    });
+            });
     });
 
 AuthenticationRouter
@@ -123,9 +122,9 @@ AuthenticationRouter
                         return res.status(200).json({
                             employee: dbEmployee,
                             token: JWT.createJwt(subject, payload)
-                        })
-                    })
-            })
+                        });
+                    });
+            });
     });
 
 module.exports = AuthenticationRouter;
