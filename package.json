@@ -23,12 +23,12 @@
     "express": "^4.17.1",
     "helmet": "^3.21.2",
     "jsonwebtoken": "^8.5.1",
-    "knex": "^0.20.4",
+    "knex": "^2.0.0",
     "morgan": "^1.9.1",
-    "pg": "^7.14.0"
+    "pg": "^8.7.3"
   },
   "devDependencies": {
     "nodemon": "^2.0.2",
-    "postgrator-cli": "^3.3.0"
+    "postgrator-cli": "^6.0.0"
   }
 }
