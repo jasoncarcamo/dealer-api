@@ -85,7 +85,7 @@ AuthenticationRouter
             password
         };
         const database = req.app.get("db");
-
+        
         for(const key of Object.keys(employee)){
             if(!key || !employee[key]){
                 return res.status(400).json({
@@ -96,6 +96,7 @@ AuthenticationRouter
 
         EmployeeService.getEmployeeByWorkEmail(database, employee.work_email)
             .then( dbEmployee => {
+                
                 if(!dbEmployee){
                     return res.status(200).json({
                         error: `${employee.work_email} was not found`

@@ -5,6 +5,6 @@ CREATE TABLE employees (
     last_name TEXT NOT NULL,
     commission_num INTEGER NOT NULL,
     work_email TEXT NOT NULL,
-    mobile_number INTEGER NOT NULL,
+    mobile_number BIGINT NOT NULL,
     password TEXT NOT NULL
 );
